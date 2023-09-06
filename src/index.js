@@ -5,6 +5,7 @@ import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import Login from './Login';
 import Cadastro from './Cadastro';
 import {createTheme, ThemeProvider} from '@mui/material'
+import CadastroMovie from './CadastroMovie';
 
 
 const theme = createTheme({
@@ -30,7 +31,7 @@ const theme = createTheme({
     },
     background: {
       default: '#1e1e1e',
-      paper: '#0a0a0a',
+      paper: '#FFFF',
     },
     typography: {
       fontFamily: 'Russo One',
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/cadastro",
     element: <Cadastro/>,
+  },
+  {
+    path: "/cadastro-movie",
+    element: <CadastroMovie/>,
   }
 ]);
 
