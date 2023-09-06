@@ -1,33 +1,7 @@
-import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Checkbox, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
-import {createTheme, ThemeProvider} from '@mui/material'
 import { useState,useEffect } from 'react'
 import { useNavigate, json, Navigate } from "react-router-dom";
-
-const theme = createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-          main: '#BD0B08',
-        },
-        secondary: {
-          main: '#660025',
-        },
-        success: {
-          main: '#12e221',
-        },
-        error: {
-          main: '#FF2A08',
-        },
-        warning: {
-          main: '#FFA400',
-        },
-        info: {
-          main: '#D402BA',
-        },
-      },
-      
-})
 
 function Login() {
 
@@ -54,7 +28,7 @@ function Login() {
         evento.preventDefault();
 
         //requisiçoes assincronas, o js trabalha essas requisições como promessas (pois ele libera o código enquanto as coisas estão acontecendo) - promisse ES7/ javascript
-        fetch("https://api.escuelajs.co/api/v1/auth/login", {
+        fetch("http://10.139.75.32:8080/login", {
             method: "POST",
             headers: {
                 'Content-Type' : 'application/json'
@@ -62,7 +36,7 @@ function Login() {
             body: JSON.stringify(
                 {
                     email: email,
-                    password: senha
+                    senha: senha
                 }
             )
             /* O fetch faz uma requisição para a url escrita, e fala para o servidor as informações que vão mandar. 
@@ -70,12 +44,13 @@ function Login() {
             porém há mais outros 4 metodos de envio de dados.
             Depois especifica-se o tipo de requisição no headers (nesse caso em JSON), e no body vai as informações captadas pelos inputs em JSON*/
         })
-        .then( (resposta) => resposta.json()) /*then - então se foi feito tudo certo pega a respotas e transforma em JSON*/
+        .then( (resposta) => resposta.json() ) /*then - então se foi feito tudo certo pega a respotas e transforma em JSON*/
         .then( (json) => {
-            if(json.statusCode === 401){
-                setErro( true );
-            }else{
+            if(json.user ){
                 setLogin( true );
+            }else{
+                /*localStorage.setItem("token", json.access_token);*/
+                setErro( true )
             }
         }) /* então pega a respota e faz as verificações, devolvendo um token de autorização que fica salvo no local storage*/
         .catch( ( erro ) => {
@@ -84,7 +59,6 @@ function Login() {
     } // senha: 12345,  email: maria@mail.com
 
   return (
-    <ThemeProvider theme={theme}>
         <Container component="section" maxWidth="xs">
             <Box 
             sx={{
@@ -96,6 +70,7 @@ function Login() {
             }}
             >
                 <Typography component="h1" variant="h4">Entrar</Typography>
+                { erro && (<Alert severity="error">Revise seus dados e tente novamente</Alert>) }
                 <Box component="form" onSubmit={Autenticar}>
                     <TextField 
                     type="email" 
@@ -105,9 +80,11 @@ function Login() {
                     fullWidth
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    {...erro && ("error")}
                     />
 
                     <TextField 
+                    InputAdornment
                     type="password" 
                     label="Senha" 
                     variant="outlined" 
@@ -142,7 +119,6 @@ function Login() {
                 </Box>
             </Box>
         </Container> 
-    </ThemeProvider>
   )
 }
 
