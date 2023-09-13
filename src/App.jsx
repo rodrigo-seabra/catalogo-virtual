@@ -24,7 +24,9 @@ function App(props) {
   }, []); // [] significa que no monento da montagem da tela essa função será executada
 
 
-  function Excluir(){
+  function Excluir(e, id){
+    e.preventDefault();
+
     fetch(process.env.REACT_APP_BACKEND + "filmes", {
       method: "DELETE",
       headers: {
@@ -36,18 +38,15 @@ function App(props) {
     })
       .then((resposta) => resposta.json())
       .then((json) => {
-        if (json._id) {
-          setCadastrado(true);
-          setErro(false);
-        } else {
-          setCadastrado(true);
-          setErro(true);
-        }
+        const novalista= filmes.filter(( filme ) => filme._id !== id );
+        setFilmes(novalista);
       })
       .catch((erro) => {
         setErro(true);
       });
   }
+
+
 
 
   return (
@@ -71,7 +70,8 @@ function App(props) {
                 duracao={filme.duracao}
                 ano={filme.ano}
                 categoria={filme.categoria}
-                excluir={(e) => Excluir (e, filme._id)}
+                excluir={ (e) => Excluir(e, filme._id) }
+                id={filme._id}
               />
             )) /**Pega todos filmes e mapeia eles e exibe um por um */
         }

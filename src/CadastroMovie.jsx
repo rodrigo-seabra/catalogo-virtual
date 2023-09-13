@@ -14,7 +14,7 @@ function CadastroMovie() {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [ano, setAno] = useState("");
-  const [duraçao, setDuracao] = useState("");
+  const [duracao, setDuracao] = useState("");
   const [imagem, setImagem] = useState("");
   const [cadastrado, setCadastrado] = useState(false);
   const [erro, setErro] = useState(false);
@@ -54,7 +54,8 @@ function CadastroMovie() {
         descricao: descricao,
         categoria: inputValue,
         ano: ano,
-        duraçao: duraçao,
+        duracao: duracao,
+        imagem: imagem,
       }),
     })
       .then((resposta) => resposta.json())
@@ -63,8 +64,8 @@ function CadastroMovie() {
           setCadastrado(true);
           setErro(false);
         } else {
-          setCadastrado(true);
           setErro(true);
+          setCadastrado(false);
         }
       })
       .catch((erro) => {
@@ -127,13 +128,13 @@ function CadastroMovie() {
           />
 
           <TextField
-            type="time"
+            type="text"
             label="Duração"
             variant="outlined"
             margin="normal"
             fullWidth
             onChange={(e) => setDuracao(e.target.value)}
-            value={duraçao}
+            value={duracao}
           />
 
           <TextField
