@@ -1,8 +1,20 @@
 import { useEffect, useState } from "react";
 import Filme from "./components/Filme";
-import { Container } from "@mui/material";
+import { Box, Container, Typography, Button, Grid } from "@mui/material";
+import "./global.css";
+import Header from "./components/Header";
+import Style from "./style/app.module.css";
+import Banner from "./components/Banner";
+import Cards from "./components/Cards";
+import Footer from "./components/Footer";
 
 function App(props) {
+  const [menu, setMenu] = useState(false);
+
+  function ShowMenu() {
+    setMenu(true);
+  }
+
   const [filmes, setFilmes] = useState();
   const [erro, setErro] = useState(false);
 
@@ -23,8 +35,7 @@ function App(props) {
       });
   }, []); // [] significa que no monento da montagem da tela essa função será executada
 
-
-  function Excluir(e, id){
+  function Excluir(e, id) {
     e.preventDefault();
 
     fetch(process.env.REACT_APP_BACKEND + "filmes", {
@@ -33,12 +44,12 @@ function App(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: id
+        id: id,
       }),
     })
       .then((resposta) => resposta.json())
       .then((json) => {
-        const novalista= filmes.filter(( filme ) => filme._id !== id );
+        const novalista = filmes.filter((filme) => filme._id !== id);
         setFilmes(novalista);
       })
       .catch((erro) => {
@@ -46,36 +57,47 @@ function App(props) {
       });
   }
 
-
-
-
   return (
     <>
-      <h1>Filmes</h1>
+      <Header />
       <Container
         sx={{
-          display: "flex",
-          flexFlow: "row",
-          flexWrap: "wrap",
-          gap: "2rem",
+          width: "100%",
+          height: "100%",
+          minWidth: 1440,
         }}
+        className={Style.impossivel}
       >
-        {
-          filmes &&
-            filmes.map((filme, index) => (
-              <Filme
-                img={filme.imagem}
-                titulo={filme.titulo}
-                descricao={filme.descricao}
-                duracao={filme.duracao}
-                ano={filme.ano}
-                categoria={filme.categoria}
-                excluir={ (e) => Excluir(e, filme._id) }
-                id={filme._id}
-              />
-            )) /**Pega todos filmes e mapeia eles e exibe um por um */
-        }
+        <Banner />
+        <Container component="section">
+          <Typography variant="h1" component="h1" sx={{ fontFamily: "Roboto" }}>
+            Principais Carros
+          </Typography>
+          <Box
+            component={"div"}
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <Cards />
+            <Cards />
+            <Cards />
+            <Cards />
+          </Box>
+        </Container>
+        <Box
+          component="div"
+          sx={{
+            textAlign: "center",
+            mt: 2,
+          }}
+        >
+          <Box
+            sx={{
+              overflow: "hidden",
+            }}
+          ></Box>
+        </Box>
       </Container>
+      <Footer />
     </>
   );
 }

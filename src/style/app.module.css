@@ -1,0 +1,8 @@
+.impossivel {
+  margin: 0;
+  padding: 0;
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

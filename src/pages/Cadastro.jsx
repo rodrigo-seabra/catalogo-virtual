@@ -70,7 +70,7 @@ function Cadastro() {
   }, [cadastro]);
 
   return (
-    <Container component="section" maxWidth="sm">
+    <Container component="section" maxWidth="xl">
       <Box
         sx={{
           mt: 20,
