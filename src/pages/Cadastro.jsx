@@ -5,9 +5,11 @@ import {
   Container,
   TextField,
   Typography,
+  CardMedia,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate, json, Navigate } from "react-router-dom";
+import wallpaper from "../Photos/wallpaperflare.com_wallpaper.jpg";
 
 function Cadastro() {
   const [email, setEmail] = useState("");
@@ -70,99 +72,122 @@ function Cadastro() {
   }, [cadastro]);
 
   return (
-    <Container component="section" maxWidth="xl">
-      <Box
+    <Container
+      sx={{
+        width: "100%",
+        height: "100%",
+        padding: 0,
+        minWidth: "100%",
+        minHeight: "100%",
+        backgroundImage: `url(${wallpaper})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        overflow: "hidden",
+      }}
+    >
+      <Container
+        component="section"
+        maxWidth="xs"
         sx={{
-          mt: 20,
-          borderRadius: "5px",
           display: "flex",
-          flexDirection: "column",
+          height: "100vh",
+          justifyContent: "center",
           alignItems: "center",
-          padding: "20px",
         }}
       >
-        <Typography component="h1" variant="h4">
-          Cadastro
-        </Typography>
-        {erro && (
-          <Alert severity="error" sx={{ mb: 2, mt: 2 }}>
-            Revise seus dados e tente novamente
-          </Alert>
-        )}
-        {cadastro && (
-          <Alert severity="success" sx={{ mb: 2, mt: 2 }}>
-            Cadastro realizado com sucesso
-          </Alert>
-        )}
-        <Box component="form" onSubmit={Cadastrar}>
-          <TextField
-            type="text"
-            label="Nome Completo"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
-          <TextField
-            type="text"
-            label="CPF"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            onChange={(e) => setCpf(e.target.value)}
-            value={cpf}
-          />
-          <TextField
-            type="number"
-            label="Telefone"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            onChange={(e) => setTell(e.target.value)}
-            value={tell}
-          />
+        <Box
+          sx={{
+            borderRadius: "5px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+          }}
+        >
+          <Typography component="h1" variant="h4">
+            Cadastro
+          </Typography>
+          {erro && (
+            <Alert severity="error" sx={{ mb: 2, mt: 2 }}>
+              Revise seus dados e tente novamente
+            </Alert>
+          )}
+          {cadastro && (
+            <Alert severity="success" sx={{ mb: 2, mt: 2 }}>
+              Cadastro realizado com sucesso
+            </Alert>
+          )}
+          <Box component="form" onSubmit={Cadastrar}>
+            <TextField
+              type="text"
+              label="Nome Completo"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+            <TextField
+              type="text"
+              label="CPF"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              onChange={(e) => setCpf(e.target.value)}
+              value={cpf}
+            />
+            <TextField
+              type="number"
+              label="Telefone"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              onChange={(e) => setTell(e.target.value)}
+              value={tell}
+            />
 
-          <TextField
-            type="email"
-            label="Email"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
+            <TextField
+              type="email"
+              label="Email"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
 
-          <TextField
-            type="password"
-            label="Senha"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            onChange={(e) => setSenha(e.target.value)}
-            value={senha}
-          />
+            <TextField
+              type="password"
+              label="Senha"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              onChange={(e) => setSenha(e.target.value)}
+              value={senha}
+            />
 
-          <TextField
-            type="password"
-            label="Confirmar senha"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            onChange={(e) => setConfirmar(e.target.value)}
-            value={confirmar}
-          />
+            <TextField
+              type="password"
+              label="Confirmar senha"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              onChange={(e) => setConfirmar(e.target.value)}
+              value={confirmar}
+            />
 
-          <Button
-            variant="contained"
-            sx={{ mt: 2, mb: 2 }}
-            type="submit"
-            fullWidth
-          >
-            Cadastrar
-          </Button>
+            <Button
+              variant="contained"
+              sx={{ mt: 2, mb: 2 }}
+              type="submit"
+              fullWidth
+            >
+              Cadastrar
+            </Button>
+          </Box>
         </Box>
-      </Box>
+      </Container>
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Filme from "./components/Filme";
-import { Box, Container, Typography, Button, Grid } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import "./global.css";
 import Header from "./components/Header";
 import Style from "./style/app.module.css";
@@ -9,12 +9,6 @@ import Cards from "./components/Cards";
 import Footer from "./components/Footer";
 
 function App(props) {
-  const [menu, setMenu] = useState(false);
-
-  function ShowMenu() {
-    setMenu(true);
-  }
-
   const [filmes, setFilmes] = useState();
   const [erro, setErro] = useState(false);
 
