@@ -13,6 +13,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import wallpaper from "../Photos/wallpaperflare.com_wallpaper.jpg";
+import Footer from "../components/Footer";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -163,6 +164,7 @@ function Login() {
           </Box>
         </Container>
       </Container>
+      <Footer />
     </>
   );
 }

@@ -91,7 +91,7 @@ function App(props) {
           ></Box>
         </Box>
       </Container>
-      <Footer />
+      <Footer mt="8rem" />
     </>
   );
 }

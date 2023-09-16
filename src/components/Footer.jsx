@@ -2,7 +2,7 @@ import { Copyright, Title } from "@mui/icons-material";
 import { Box, Container, Typography, Link } from "@mui/material";
 import React from "react";
 
-function Footer() {
+function Footer(props) {
   function Copy() {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
@@ -18,7 +18,11 @@ function Footer() {
   return (
     <Box
       component={"footer"}
-      sx={{ backgroundColor: "rgba(3, 98, 252, 0.36)", mt: 8, padding: 0.8 }}
+      sx={{
+        backgroundColor: "rgba(3, 98, 252, 0.36)",
+        mt: `${props.mt}`,
+        padding: 0.8,
+      }}
     >
       <Container maxWidth="lg" sx={{ textAlign: "center" }}>
         <Typography>CARS SYSTEMS</Typography>
