@@ -3,14 +3,13 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-
 import { styled, alpha } from "@mui/material/styles";
+import OptionsMenu from "./OptionsMenu";
 
 export default function Header(props) {
   const Search = styled("div")(({ theme }) => ({
@@ -57,7 +56,7 @@ export default function Header(props) {
   const [menu, setMenu] = React.useState(false);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position: "sticky", top: "0" }}>
       <AppBar
         position="static"
         sx={{ backgroundColor: "rgba(3, 98, 252, 0.76)", color: "black" }}
@@ -85,52 +84,7 @@ export default function Header(props) {
               />
             )}
           </IconButton>
-          {menu && (
-            <Box
-              component={"div"}
-              sx={{
-                position: "absolute",
-                top: 63,
-                left: 0,
-                height: 900,
-                width: 300,
-                backgroundColor: "#8CB8FF",
-              }}
-            >
-              <Box
-                component={"div"}
-                sx={{
-                  display: "flex",
-                  flexFlow: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  alignContent: "center",
-                  backgroundColor: "#8CB8FF",
-                  color: "black",
-                }}
-              >
-                <Button>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{ flexGrow: 1, color: "black" }}
-                  >
-                    Cadastrar carro
-                  </Typography>
-                </Button>
-                <Button>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{ flexGrow: 1, color: "black" }}
-                  >
-                    Carros
-                  </Typography>
-                </Button>
-              </Box>
-            </Box>
-          )}
-
+          {menu && <OptionsMenu />}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             CARS
           </Typography>
