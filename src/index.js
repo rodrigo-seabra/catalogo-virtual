@@ -9,6 +9,7 @@ import Style from "./global.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Cadastro from "./pages/Cadastro";
 import CadastroCar from "./pages/CadastroCar";
+import Carros from "./pages/Carros";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/cadastrar-carro",
     element: <CadastroCar />,
+  },
+  {
+    path: "/exibe-carros",
+    element: <Carros />,
   },
 ]);
 
