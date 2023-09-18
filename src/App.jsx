@@ -7,8 +7,12 @@ import Style from "./style/app.module.css";
 import Banner from "./components/Banner";
 import Cards from "./components/Cards";
 import Footer from "./components/Footer";
+import { useNavigate } from "react-router-dom";
+import { AspectRatio } from "@mui/icons-material";
+import Carrousel from "./components/Carrousel";
 
 function App(props) {
+  const navigate = useNavigate();
   const [filmes, setFilmes] = useState();
   const [erro, setErro] = useState(false);
 
@@ -53,7 +57,15 @@ function App(props) {
 
   return (
     <>
-      <Header />
+      <Header
+        mb="2rem"
+        entrar={() => {
+          navigate("/login");
+        }}
+        cadastrar={() => {
+          navigate("/cadastro");
+        }}
+      />
       <Container
         sx={{
           width: "100%",
@@ -62,7 +74,7 @@ function App(props) {
         }}
         className={Style.impossivel}
       >
-        <Banner />
+        <Carrousel />
         <Container component="section">
           <Typography variant="h1" component="h1" sx={{ fontFamily: "Roboto" }}>
             Principais Carros

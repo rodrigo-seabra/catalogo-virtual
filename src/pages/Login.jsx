@@ -22,7 +22,7 @@ function Login() {
   const [login, setLogin] = useState(false);
   const [erro, setErro] = useState(false);
   const navigate = useNavigate();
-  /*
+
   useEffect(() => {
     if (login) {
       localStorage.setItem("user", JSON.stringify({ email: email }));
@@ -31,14 +31,14 @@ function Login() {
       navigate("/"); //mandando para raíz do app
     } else {
     }
-  }, [login]);*/
+  }, [login]);
 
   function Autenticar(evento) {
     // o evento pode ser abreviado para e
     evento.preventDefault();
 
     //requisiçoes assincronas, o js trabalha essas requisições como promessas (pois ele libera o código enquanto as coisas estão acontecendo) - promisse ES7/ javascript
-    fetch("http://localhost:3000/person", {
+    fetch(process.env.REACT_APP_BACKEND + "login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

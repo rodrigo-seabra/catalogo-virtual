@@ -10,6 +10,8 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import Cadastro from "./pages/Cadastro";
 import CadastroCar from "./pages/CadastroCar";
 import Carros from "./pages/Carros";
+import VejaMais from "./pages/VejaMais";
+import Carrousel from "./components/Carrousel";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
   {
     path: "/exibe-carros",
     element: <Carros />,
+  },
+  {
+    path: "/veja-mais",
+    element: <VejaMais />,
+  },
+  {
+    path: "/teste",
+    element: <Carrousel />,
   },
 ]);
 

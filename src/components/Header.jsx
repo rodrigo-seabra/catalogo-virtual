@@ -12,6 +12,7 @@ import { styled, alpha } from "@mui/material/styles";
 import OptionsMenu from "./OptionsMenu";
 
 export default function Header(props) {
+  //códigos da search bar do mui
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -53,10 +54,14 @@ export default function Header(props) {
     },
   }));
 
+  // const que analisa se o meu esta aberto ou não
   const [menu, setMenu] = React.useState(false);
 
   return (
-    <Box sx={{ flexGrow: 1, position: "sticky", top: "0" }}>
+    <Box
+      sx={{ flexGrow: 1, position: "sticky", top: "0", zIndex: "999" }}
+      mb={props.mb}
+    >
       <AppBar
         position="static"
         sx={{ backgroundColor: "rgba(3, 98, 252, 0.76)", color: "black" }}
@@ -84,7 +89,12 @@ export default function Header(props) {
               />
             )}
           </IconButton>
-          {menu && <OptionsMenu />}
+          {menu && (
+            <OptionsMenu
+              onclickEntrar={props.entrar}
+              onClickCadastrar={props.cadastrar}
+            />
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             CARS
           </Typography>

@@ -66,7 +66,7 @@ export default function OptionsMenu(props) {
             <Avatar src="/broken-image.jpg" sx={{ width: 56, height: 56 }} />
           </Button>
           <Box>
-            <Button sx={{ display: "block" }}>
+            <Button sx={{ display: "block" }} onClick={props.onclickEntrar}>
               <Typography
                 variant="h6"
                 component="div"
@@ -80,6 +80,7 @@ export default function OptionsMenu(props) {
                 variant="h6"
                 component="div"
                 sx={{ flexGrow: 1, color: "black" }}
+                onClick={props.onClickCadastrar}
               >
                 Cadastrar
               </Typography>
