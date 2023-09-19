@@ -23,7 +23,8 @@ function Footer(props) {
     <Box
       component={"footer"}
       sx={{
-        backgroundColor: "rgba(3, 98, 252, 0.36)",
+        backgroundColor: "rgba(0, 0, 0, 0.76)",
+        color:"white",
         mt: `${props.mt}`,
         padding: 0.8,
       }}

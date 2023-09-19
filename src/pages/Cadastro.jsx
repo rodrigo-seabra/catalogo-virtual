@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, json, Navigate } from "react-router-dom";
 import wallpaper from "../Photos/wallpaperflare.com_wallpaper.jpg";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 function Cadastro() {
   const [email, setEmail] = useState("");
@@ -74,6 +75,7 @@ function Cadastro() {
 
   return (
     <>
+      <Header/>
       <Container
         sx={{
           width: "100%",

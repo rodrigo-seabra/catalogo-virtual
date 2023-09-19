@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import wallpaper from "../Photos/wallpaperflare.com_wallpaper.jpg";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -65,6 +66,7 @@ function Login() {
 
   return (
     <>
+    <Header navegar={true}/>
       <Container
         sx={{
           width: "100%",

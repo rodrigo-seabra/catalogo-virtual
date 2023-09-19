@@ -11,6 +11,7 @@ import {
 import { useState, useEffect } from "react";
 import wallpaper from "../Photos/wallpaperflare.com_wallpaper.jpg";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 function CadastroCar() {
   const [titulo, setTitulo] = useState("");
@@ -77,6 +78,7 @@ function CadastroCar() {
 
   return (
     <>
+    <Header/>
       <Container
         sx={{
           width: "100%",

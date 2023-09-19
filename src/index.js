@@ -11,7 +11,8 @@ import Cadastro from "./pages/Cadastro";
 import CadastroCar from "./pages/CadastroCar";
 import Carros from "./pages/Carros";
 import VejaMais from "./pages/VejaMais";
-import Carrousel from "./components/Carrousel";
+import ResponsiveAppBar from "./components/NewHeader";
+import Banner from "./components/Banner";
 
 const router = createBrowserRouter([
   {
@@ -40,8 +41,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/teste",
-    element: <Carrousel />,
+    element: <Banner />,
   },
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

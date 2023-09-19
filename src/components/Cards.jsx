@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import img from "../Photos/carroCard.png";
 
-function Cards() {
+function Cards(props) {
   return (
     <Card sx={{ maxWidth: 320 }}>
       <CardActionArea>
@@ -29,7 +29,7 @@ function Cards() {
           </Typography>
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-          <Button>Veja Mais</Button>
+          <Button onClick={props.onClickVejaMais}>Veja Mais</Button>
         </CardActions>
       </CardActionArea>
     </Card>

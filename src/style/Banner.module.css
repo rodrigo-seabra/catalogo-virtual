@@ -1,0 +1,135 @@
+.section{
+  margin-top: 2%;
+  margin-bottom: 3%;
+
+  width: 100vw;
+  height: 43vh;
+  background: rgb(132, 161, 198);
+  background: linear-gradient(
+    280deg,
+    rgba(132, 161, 198, 1) 0%,
+    rgba(83, 96, 113, 1) 50%,
+    rgba(21, 22, 24, 1) 74%,
+    rgba(3, 3, 5, 1) 100%
+    
+  );
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bgdiv {
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.img{
+  height: 500px;
+}
+
+@media (max-width: 1068px){
+    .bgdiv{
+        width: 100%;
+        height: 30%;
+    }
+    .img{
+      height: 240px;
+    }
+    .divTitle{
+      width: 300px;
+    }
+    .title{
+      width: 300px;
+      font-size: 1.9rem;
+      color: white;}
+      .span{
+        font-size:2.3rem;
+        color: rgb(126, 4, 4);
+      }
+      
+    
+}
+
+@media (max-width: 560px) and (max-width: 768px){
+  .bgdiv{
+      width: 100%;
+      height: 30%;
+  }
+  .img{
+    height: 140px;
+  }
+  .divTitle{
+    width: 300px;
+  }
+  .title{
+    width: 300px;
+    font-size: 1.3rem;
+    color: white;}
+    .span{
+      font-size: 1.6rem;
+      color: rgb(126, 4, 4);
+    }
+    
+  
+}
+
+@media (max-width: 550px){
+  .bgdiv{
+      width: 100%;
+      height: 30%;
+  }
+  .img{
+    display: none;
+  }
+  .divTitle{
+    width: 300px;
+  }
+  .title{
+    width: 250px;
+    font-size: 1.7rem;
+    color: white;}
+    .span{
+      font-size: 1.6rem;
+      color: rgb(126, 4, 4);
+    }
+    
+  
+}
+
+@media  (min-width: 1920px) and (max-width: 2560px){
+    .bgdiv{
+        width: 100%;
+        height: 50%;
+    }    .title{
+      width: 500px;
+      font-size: 2.8rem;
+      color: white;}
+      
+
+    .span{
+      font-size: 3.6rem;
+      color: rgb(126, 4, 4);
+    }
+}
+
+
+@media  (min-width: 1068px) and (max-width: 1900px){
+  .bgdiv{
+      width: 100%;
+      height: 50%;
+  }    .title{
+    width: 500px;
+    font-size: 2.8rem;
+    color: white;}
+    .img{
+      height: 340px;
+    }
+
+  .span{
+    font-size: 3.6rem;
+    color: rgb(126, 4, 4);
+  }
+}

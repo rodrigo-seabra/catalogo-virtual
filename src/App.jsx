@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import Filme from "./components/Filme";
 import { Box, Container, Typography } from "@mui/material";
 import "./global.css";
 import Header from "./components/Header";
 import Style from "./style/app.module.css";
-import Banner from "./components/Banner";
 import Cards from "./components/Cards";
 import Footer from "./components/Footer";
 import { useNavigate } from "react-router-dom";
-import { AspectRatio } from "@mui/icons-material";
-import Carrousel from "./components/Carrousel";
+import Banner from "./components/Banner";
+
+import { Navigate } from "react-router-dom";
 
 function App(props) {
   const navigate = useNavigate();
@@ -59,36 +58,35 @@ function App(props) {
     <>
       <Header
         mb="2rem"
-        entrar={() => {
+        onClickLogin={() => {
           navigate("/login");
         }}
-        cadastrar={() => {
+        onClickCadastrar={() => {
           navigate("/cadastro");
         }}
+        home={true}
       />
+      <Banner />
       <Container
         sx={{
           width: "100%",
           height: "100%",
-          minWidth: 1440,
+          minWidth: 1024,
         }}
         className={Style.impossivel}
       >
-        <Carrousel />
-        <Container component="section">
-          <Typography variant="h1" component="h1" sx={{ fontFamily: "Roboto" }}>
-            Principais Carros
-          </Typography>
-          <Box
-            component={"div"}
-            sx={{ display: "flex", justifyContent: "space-between" }}
-          >
-            <Cards />
-            <Cards />
-            <Cards />
-            <Cards />
-          </Box>
-        </Container>
+        <Typography variant="h1" component="h1" sx={{ fontFamily: "Roboto" }}>
+          Principais Carros
+        </Typography>
+        <Box
+          component={"div"}
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Cards />
+          <Cards />
+          <Cards />
+          <Cards />
+        </Box>
         <Box
           component="div"
           sx={{

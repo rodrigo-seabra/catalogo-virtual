@@ -2,16 +2,25 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-import SearchIcon from "@mui/icons-material/Search";
+import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import MinorCrashIcon from "@mui/icons-material/MinorCrash";
+import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
-import OptionsMenu from "./OptionsMenu";
+import { Link } from "@mui/material";
+import { color } from "@mui/system";
 
-export default function Header(props) {
+const settings = ["Profile", "Logout"];
+
+function Header(props) {
   //códigos da search bar do mui
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -54,61 +63,162 @@ export default function Header(props) {
     },
   }));
 
-  // const que analisa se o meu esta aberto ou não
-  const [menu, setMenu] = React.useState(false);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <Box
-      sx={{ flexGrow: 1, position: "sticky", top: "0", zIndex: "999" }}
-      mb={props.mb}
+    <AppBar
+      position="sticky"
+      sx={{ backgroundColor: "rgba(0, 0, 0, 0.76)", color: "white", height:'60px'}}
     >
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: "rgba(3, 98, 252, 0.76)", color: "black" }}
-      >
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+      <Container maxWidth="1920px">
+        <Toolbar disableGutters>
+          <MinorCrashIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
           >
-            {!menu && (
-              <MenuIcon
-                onClick={() => {
-                  setMenu(true);
-                }}
-              />
-            )}
-            {menu && (
-              <CloseIcon
-                onClick={() => {
-                  setMenu(false);
-                }}
-              />
-            )}
-          </IconButton>
-          {menu && (
-            <OptionsMenu
-              onclickEntrar={props.entrar}
-              onClickCadastrar={props.cadastrar}
-            />
-          )}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             CARS
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              <Link
+                href="http://localhost:3000/cadastrar-carro"
+                sx={{ color: "white", textDecoration: "none" }}
+              >
+                Cadastre seu carro
+              </Link>
+              <Link
+                href="http://localhost:3000/exibe-carros"
+                sx={{ color: "white", textDecoration: "none" }}
+              >
+                Carros
+              </Link>{" "}
+            </Menu>
+          </Box>
+          <MinorCrashIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box
+            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, gap: 2 }}
+          >
+            <Link
+              href="http://localhost:3000/cadastrar-carro"
+              sx={{ color: "white", textDecoration: "none" }}
+            >
+              Cadastre seu carro
+            </Link>
+            <Link
+              href="http://localhost:3000/exibe-carros"
+              sx={{ color: "white", textDecoration: "none" }}
+            >
+              Carros
+            </Link>
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem  onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" onClick={props.onClickCadastrar}>Cadastrar</Typography>
+              </MenuItem>
+              <MenuItem  onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" onClick={props.onClickLogin}>Login</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
         </Toolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </AppBar>
   );
 }
+export default Header;
