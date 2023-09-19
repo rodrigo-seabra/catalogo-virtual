@@ -66,7 +66,7 @@ function Login() {
 
   return (
     <>
-    <Header navegar={true}/>
+    <Header/>
       <Container
         sx={{
           width: "100%",

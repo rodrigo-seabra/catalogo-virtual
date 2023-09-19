@@ -209,10 +209,10 @@ function Header(props) {
               onClose={handleCloseUserMenu}
             >
               <MenuItem  onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" onClick={props.onClickCadastrar}>Cadastrar</Typography>
+                <Link textAlign="center"  href="http://localhost:3000/cadastro">Cadastrar</Link>
               </MenuItem>
               <MenuItem  onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" onClick={props.onClickLogin}>Login</Typography>
+                <Link textAlign="center" href="http://localhost:3000/login">Login</Link>
               </MenuItem>
             </Menu>
           </Box>

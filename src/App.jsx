@@ -56,16 +56,7 @@ function App(props) {
 
   return (
     <>
-      <Header
-        mb="2rem"
-        onClickLogin={() => {
-          navigate("/login");
-        }}
-        onClickCadastrar={() => {
-          navigate("/cadastro");
-        }}
-        home={true}
-      />
+      <Header mb="2rem" />
       <Banner />
       <Container
         sx={{
@@ -82,10 +73,26 @@ function App(props) {
           component={"div"}
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
+          <Cards
+            onClickVejaMais={() => {
+              navigate("/veja-mais");
+            }}
+          />
+          <Cards
+            onClickVejaMais={() => {
+              navigate("/veja-mais");
+            }}
+          />
+          <Cards
+            onClickVejaMais={() => {
+              navigate("/veja-mais");
+            }}
+          />
+          <Cards
+            onClickVejaMais={() => {
+              navigate("/veja-mais");
+            }}
+          />
         </Box>
         <Box
           component="div"
