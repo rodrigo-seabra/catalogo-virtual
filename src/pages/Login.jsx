@@ -157,7 +157,14 @@ function Login() {
                   <Grid item xs>
                     Esqueci minha senha
                   </Grid>
-                  <Grid item>Cadastrar</Grid>
+                  <Grid
+                    item
+                    onClick={() => {
+                      navigate("/cadastro");
+                    }}
+                  >
+                    Cadastrar
+                  </Grid>
                 </Grid>
               </Box>
             </Box>

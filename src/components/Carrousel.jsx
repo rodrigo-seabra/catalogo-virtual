@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 import banner from "../Photos/banner.png";
+import banner768 from "../Photos/wal768.png";
 
 import Style from "../style/Carrousel.module.css";
 
@@ -18,18 +19,15 @@ function Carrousel() {
     },
     {
       id: "2",
-      image:
-        "https://img.freepik.com/fotos-premium/trafego-de-rodas-de-tecnologia-classica-de-automovel-moderno_665346-119.jpg",
+      image: `${banner}`,
     },
     {
       id: "3",
-      image:
-        "https://img.freepik.com/fotos-premium/trafego-de-rodas-de-tecnologia-classica-de-automovel-moderno_665346-119.jpg",
+      image: `${banner}`,
     },
     {
       id: "4",
-      image:
-        "https://img.freepik.com/fotos-premium/trafego-de-rodas-de-tecnologia-classica-de-automovel-moderno_665346-119.jpg",
+      image: `${banner}`,
     },
   ];
 
