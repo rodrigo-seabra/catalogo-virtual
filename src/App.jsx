@@ -58,20 +58,19 @@ function App(props) {
     <>
       <Header mb="2rem" />
       <Banner />
-      <Container
+      <Container 
         sx={{
           width: "100%",
           height: "100%",
-          minWidth: 1024,
         }}
         className={Style.impossivel}
       >
-        <Typography variant="h1" component="h1" sx={{ fontFamily: "Roboto" }}>
+        <Typography variant="h2" component="h2" sx={{ fontFamily: "Roboto", maxWidth:"6rem" }}>
           Principais Carros
         </Typography>
         <Box
           component={"div"}
-          sx={{ display: "flex", justifyContent: "space-between" }}
+          sx={{ display: {xl: 'flex', xs:'block'}, justifyContent: "space-between" }}
         >
           <Cards
             onClickVejaMais={() => {

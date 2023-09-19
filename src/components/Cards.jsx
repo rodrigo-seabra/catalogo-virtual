@@ -14,7 +14,7 @@ import img from "../Photos/carroCard.png";
 
 function Cards(props) {
   return (
-    <Card sx={{ maxWidth: 320 }}>
+    <Card sx={{ maxWidth: 300 }}>
       <CardActionArea>
         <CardMedia
           component="img"
