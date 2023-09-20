@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import "./global.css";
 import Header from "./components/Header";
 import Style from "./style/app.module.css";
 import Cards from "./components/Cards";
 import Footer from "./components/Footer";
-import { useNavigate } from "react-router-dom";
 import Banner from "./components/Banner";
 
-import { Navigate } from "react-router-dom";
-
 function App(props) {
-  const navigate = useNavigate();
   const [produto, setProduto] = useState();
   const [erro, setErro] = useState(false);
   const user = localStorage.getItem("usuario");
 
-  //listagem de filmes
   useEffect(() => {
     fetch(process.env.REACT_APP_BACKEND + "produtos/" + user, {
       method: "GET",
@@ -24,16 +19,16 @@ function App(props) {
         "Content-Type": "application/json",
       },
     })
-      .then((resposta) => resposta.json()) //se a resposta vier certa, transformo para json
+      .then((resposta) => resposta.json()) 
       .then((json) => {
         setProduto(json);
         const novalista = produto.filter((produtos) => produtos.categoria === 'Esportivo');
         setProduto(novalista);
-      })// se json estiver certo coloco ele dentro da variavel filems
+      })
       .catch((erro) => {
         setErro(true);
       });
-  }, []); // [] significa que no monento da montagem da tela essa função será executada
+  }, []); 
 
 
   function Excluir(e, id) {
@@ -98,7 +93,7 @@ function App(props) {
                 excluir={(e) => Excluir(e, produto._id)}
                 id={produto._id}
               />
-            )) /**Pega todos filmes e mapeia eles e exibe um por um */
+            )) 
         }
       </Container>
         <Box

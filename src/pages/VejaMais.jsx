@@ -1,13 +1,9 @@
 import React from "react";
-import ShopCar from "@mui/icons-material/ShoppingCartCheckout";
 import Header from "../components/Header";
 import { Box, Container, Typography, Button, CardMedia, Link } from "@mui/material";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
-
-import img from "../Photos/carroCard.png";
 
 function VejaMais(props) {
   const [titulo, setTitulo] = useState("");

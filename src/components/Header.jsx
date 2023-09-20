@@ -13,7 +13,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MinorCrashIcon from "@mui/icons-material/MinorCrash";
 import { Button, Link } from "@mui/material";
 import fotoperfil from "../Photos/perfil.jpg";
-import { Style } from "@mui/icons-material";
 
 function Header(props) {
   const [logado, setLogado] = React.useState(false);

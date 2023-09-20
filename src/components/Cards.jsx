@@ -1,17 +1,13 @@
 import {
-  Box,
-  Container,
   Typography,
   Button,
   Grid,
   CardActionArea,
-  CardActions,
   Card,
   CardMedia,
   Link,
   CardContent,
 } from "@mui/material";
-import img from "../Photos/carroCard.png";
 
 function Cards(props) {
   return (

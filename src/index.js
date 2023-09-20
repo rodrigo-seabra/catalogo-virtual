@@ -2,18 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import Login from "./pages/Login";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Style from "./global.css";
-
+import "./global.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Cadastro from "./pages/Cadastro";
 import CadastroCar from "./pages/CadastroCar";
 import Carros from "./pages/Carros";
 import VejaMais from "./pages/VejaMais";
-import Banner from "./components/Banner";
 import EditaCar from "./pages/EditaCar";
-import Cards from "./components/Cards";
 
 const theme = createTheme({
   palette: {
@@ -78,7 +74,8 @@ const router = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(  <ThemeProvider theme={theme}>
-  <RouterProvider router={router} />
-</ThemeProvider>
+root.render(
+  <ThemeProvider theme={theme}>
+    <RouterProvider router={router} />
+  </ThemeProvider>
 );
