@@ -1,12 +1,59 @@
 import React from "react";
 import ShopCar from "@mui/icons-material/ShoppingCartCheckout";
 import Header from "../components/Header";
-import { Box, Container, Typography, Button, CardMedia } from "@mui/material";
+import { Box, Container, Typography, Button, CardMedia, Link } from "@mui/material";
 import Footer from "../components/Footer";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 
 import img from "../Photos/carroCard.png";
 
-function VejaMais() {
+function VejaMais(props) {
+  const [titulo, setTitulo] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [ano, setAno] = useState("");
+  const [duracao, setDuracao] = useState("");
+  const [imagem, setImagem] = useState("");
+  const [cadastrado, setCadastrado] = useState(false);
+  const [erro, setErro] = useState(false);
+  const { id } = useParams();
+  const options = [
+    "Hatch",
+    "Sedã",
+    "SUV",
+    "Picapes",
+    "Crossover",
+    "Esportivo",
+  ];
+  const [value, setValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    const user = localStorage.getItem("usuario");
+    fetch(process.env.REACT_APP_BACKEND + "produtos/" + user + '/' + id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resposta) => resposta.json())
+      .then((json) => {
+        if (!json.status) {
+          setTitulo(json.titulo);
+          setDescricao(json.descricao);
+          setAno(json.ano);
+          setDuracao(json.duracao);
+          setInputValue(json.categoria);
+          setImagem(json.imagem);
+        } else {
+          setErro("Filme não encontrado");
+        }
+      })
+      .catch((erro) => {
+        setErro("Erro ao processar sua requisição");
+      });
+  }, []);
   return (
     <>
       <Header />
@@ -21,14 +68,14 @@ function VejaMais() {
       >
         <Box>
           <Typography component="h2" variant="h3">
-            Carro XYZ
+            {titulo}
           </Typography>
           <Box component={"div"}>
             <CardMedia
               component="img"
               height="390"
               width="340"
-              image={img}
+              image={imagem}
               alt="green iguana"
             />
           </Box>
@@ -50,28 +97,23 @@ function VejaMais() {
         >
           <Box>
             <Typography component="h2" variant="h3">
-              Carro XYZ
+              {titulo}
             </Typography>
           </Box>
 
           <Box textAlign={"center"}>
-            <Typography>48x de </Typography>
+            <Typography>Ano: </Typography>
 
             <Typography component="h2" variant="h2" fontWeight={"bold"}>
-              499,99
+              {ano}
             </Typography>
-            <Typography>ou R$40000,00</Typography>
+            <Typography>KM: {duracao}</Typography>
           </Box>
 
           <Box sx={{ display: "flex", justifyContent: "space-around" }}>
             <Box>
-              <Button variant="outlined" color="success" size="large">
-                COMPRAR JÁ
-              </Button>
-            </Box>
-            <Box>
-              <Button color="success" size="large">
-                <ShopCar />
+              <Button variant="outlined" color="success" size="large" id={id}>
+              <Link href={"http://localhost:3000/edita-car/" + id} sx={{textDecoration:"none", color:"green"}} >Editar</Link>
               </Button>
             </Box>
           </Box>
@@ -99,15 +141,7 @@ function VejaMais() {
         </Box>
         <Box textAlign={"center"} mt={4}>
           <Typography>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            {descricao}
           </Typography>
         </Box>
       </Container>

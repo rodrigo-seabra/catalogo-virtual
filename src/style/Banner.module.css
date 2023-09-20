@@ -1,8 +1,7 @@
 .section{
-  margin-top: 2%;
   margin-bottom: 3%;
 
-  width: 100vw;
+  width: 99.1vw;
   height: 43vh;
   background: rgb(132, 161, 198);
   background: linear-gradient(
@@ -101,7 +100,7 @@
 
 @media  (min-width: 1920px) and (max-width: 2560px){
     .bgdiv{
-        width: 100%;
+        width: 99%;
         height: 50%;
     }    .title{
       width: 500px;

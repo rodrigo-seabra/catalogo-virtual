@@ -26,8 +26,7 @@ function Cadastro() {
 
   function Cadastrar(evento) {
     evento.preventDefault();
-    //requisiçoes assincronas, o js trabalha essas requisições como promessas (pois ele libera o código enquanto as coisas estão acontecendo) - promisse ES7/ javascript
-    fetch(process.env.REACT_APP_BACKEND + "users", {
+    fetch(process.env.REACT_APP_BACKEND + "usuarios", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,38 +38,45 @@ function Cadastro() {
         telefone: tell,
         cpf: cpf,
       }),
-      /* O fetch faz uma requisição para a url escrita, e fala para o servidor as informações que vão mandar. 
-            Primeiro informa o metodo de envio, nesse caso é o POST (forma de envio de dados "camuflados"), 
-            porém há mais outros 4 metodos de envio de dados.
-            Depois especifica-se o tipo de requisição no headers (nesse caso em JSON), e no body vai as informações captadas pelos inputs em JSON*/
+
     })
       .then((resposta) =>
         resposta.json()
-      ) /*then - então se foi feito tudo certo pega a respotas e transforma em JSON*/
+      ) 
       .then((json) => {
         if (json.cpf) {
           setCadastro(true);
+          setErro(false);
+
         } else {
           setErro(true);
+          setCadastro(false);
+
         }
-      }) /* então pega a respota e faz as verificações, devolvendo um token de autorização que fica salvo no local storage*/
+      })
       .catch((erro) => {
         setErro(true);
-      }); /* catch - erro*/
+      }); 
   }
 
+  const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
   useEffect(() => {
-    if (cadastro) {
-      setEmail("");
-      setSenha("");
-      setCpf("");
-      setNome("");
-      setTell("");
-      setConfirmar("");
-      navigate("/login"); //mandando para raíz do app
-    } else {
+    async function espera()
+    {
+      await delay(1000);
+      if (cadastro) {
+        setEmail("");
+        setSenha("");
+        setCpf("");
+        setNome("");
+        setTell("");
+        setConfirmar("");
+        navigate("/login");
+      }
     }
-    //setCadastro( false )
+    espera();
   }, [cadastro]);
 
   return (

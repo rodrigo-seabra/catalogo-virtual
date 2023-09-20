@@ -24,12 +24,12 @@ function CadastroCar() {
 
   /*const para receber os valores do autocomplete, input de categoria*/
   const options = [
-    "Terror",
-    "Suspense",
-    "Ação",
-    "Comédia",
-    "Drama",
-    "Documentário",
+    "Hatch",
+    "Sedã",
+    "SUV",
+    "Picapes",
+    "Crossover",
+    "Esportivo",
   ];
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -47,7 +47,7 @@ function CadastroCar() {
 
   function Cadastrar(evento) {
     evento.preventDefault();
-    fetch(process.env.REACT_APP_BACKEND + "filmes", {
+    fetch(process.env.REACT_APP_BACKEND + "produtos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,6 +59,7 @@ function CadastroCar() {
         ano: ano,
         duracao: duracao,
         imagem: imagem,
+        usuario: localStorage.getItem('usuario'),
       }),
     })
       .then((resposta) => resposta.json())
@@ -128,7 +129,7 @@ function CadastroCar() {
             <Box component="form" onSubmit={Cadastrar}>
               <TextField
                 type="text"
-                label="Título"
+                label="Nome do Carro"
                 variant="outlined"
                 margin="normal"
                 fullWidth
@@ -155,8 +156,8 @@ function CadastroCar() {
               />
 
               <TextField
-                type="text"
-                label="Duração"
+                type="number"
+                label="Quilometragem"
                 variant="outlined"
                 margin="normal"
                 fullWidth

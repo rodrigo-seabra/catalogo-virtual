@@ -11,8 +11,40 @@ import Cadastro from "./pages/Cadastro";
 import CadastroCar from "./pages/CadastroCar";
 import Carros from "./pages/Carros";
 import VejaMais from "./pages/VejaMais";
-import ResponsiveAppBar from "./components/NewHeader";
 import Banner from "./components/Banner";
+import EditaCar from "./pages/EditaCar";
+import Cards from "./components/Cards";
+
+const theme = createTheme({
+  palette: {
+    common: { black: "#000", white: "#fff" },
+    background: { paper: "#fff", default: "#fafafa" },
+    primary: {
+      light: "#7986cb",
+      main: "rgba(3, 3, 3, 1)",
+      dark: "#303f9f",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "rgba(213, 175, 255, 1)",
+      main: "rgba(122, 0, 245, 1)",
+      dark: "rgba(59, 2, 116, 1)",
+      contrastText: "#fff",
+    },
+    error: {
+      light: "#e57373",
+      main: "#f44336",
+      dark: "#d32f2f",
+      contrastText: "#fff",
+    },
+    text: {
+      primary: "rgba(0, 0, 0, 0.87)",
+      secondary: "rgba(0, 0, 0, 0.54)",
+      disabled: "rgba(0, 0, 0, 0.38)",
+      hint: "rgba(0, 0, 0, 0.38)",
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -28,6 +60,10 @@ const router = createBrowserRouter([
     element: <Cadastro />,
   },
   {
+    path: "/edita-car/:id",
+    element: <EditaCar />,
+  },
+  {
     path: "/cadastrar-carro",
     element: <CadastroCar />,
   },
@@ -36,15 +72,13 @@ const router = createBrowserRouter([
     element: <Carros />,
   },
   {
-    path: "/veja-mais",
+    path: "/veja-mais/:id",
     element: <VejaMais />,
   },
-  {
-    path: "/teste",
-    element: <Banner />,
-  },
-
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={router} />);
+root.render(  <ThemeProvider theme={theme}>
+  <RouterProvider router={router} />
+</ThemeProvider>
+);

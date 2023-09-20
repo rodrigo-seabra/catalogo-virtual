@@ -4,64 +4,27 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import MinorCrashIcon from "@mui/icons-material/MinorCrash";
-import SearchIcon from "@mui/icons-material/Search";
-import { styled, alpha } from "@mui/material/styles";
-import { Link } from "@mui/material";
-import { color } from "@mui/system";
-
-const settings = ["Profile", "Logout"];
+import { Button, Link } from "@mui/material";
+import fotoperfil from "../Photos/perfil.jpg";
+import { Style } from "@mui/icons-material";
 
 function Header(props) {
-  //códigos da search bar do mui
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  }));
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        width: "12ch",
-        "&:focus": {
-          width: "20ch",
-        },
-      },
-    },
-  }));
+  const [logado, setLogado] = React.useState(false);
+  const user = localStorage.getItem("usuario");
+  React.useEffect(() => {
+    if (user) {
+      setLogado(true);
+    } else {
+      setLogado(false);
+    }
+  }, []);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -84,7 +47,11 @@ function Header(props) {
   return (
     <AppBar
       position="sticky"
-      sx={{ backgroundColor: "rgba(0, 0, 0, 0.76)", color: "white", height:'60px'}}
+      sx={{
+        backgroundColor: "rgba(0, 0, 0, 0.76)",
+        color: "white",
+        height: "60px",
+      }}
     >
       <Container maxWidth="1920px">
         <Toolbar disableGutters>
@@ -138,16 +105,16 @@ function Header(props) {
             >
               <Link
                 href="http://localhost:3000/cadastrar-carro"
-                sx={{ color: "white", textDecoration: "none" }}
+                sx={{ display: "block" }}
               >
                 Cadastre seu carro
               </Link>
               <Link
                 href="http://localhost:3000/exibe-carros"
-                sx={{ color: "white", textDecoration: "none" }}
+                sx={{ display: "block" }}
               >
                 Carros
-              </Link>{" "}
+              </Link>
             </Menu>
           </Box>
           <MinorCrashIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -189,7 +156,8 @@ function Header(props) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {logado && <Avatar alt="Remy Sharp" src={fotoperfil} />}
+                {!logado && <Avatar alt="Remy Sharp" src="" />}
               </IconButton>
             </Tooltip>
             <Menu
@@ -208,11 +176,37 @@ function Header(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem  onClick={handleCloseUserMenu}>
-                <Link textAlign="center"  href="http://localhost:3000/cadastro">Cadastrar</Link>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Button>
+                  <Link
+                    textAlign="center"
+                    href="http://localhost:3000/cadastro"
+                    sx={{ textDecoration: "none" }}
+                  >
+                    Cadastrar
+                  </Link>
+                </Button>
               </MenuItem>
-              <MenuItem  onClick={handleCloseUserMenu}>
-                <Link textAlign="center" href="http://localhost:3000/login">Login</Link>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Button>
+                  <Link
+                    textAlign="center"
+                    href="http://localhost:3000/login"
+                    sx={{ textDecoration: "none" }}
+                  >
+                    Login
+                  </Link>
+                </Button>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Button
+                  onClick={() => {
+                    localStorage.removeItem("usuario");
+                    window.location.reload();
+                  }}
+                >
+                  Logout
+                </Button>
               </MenuItem>
             </Menu>
           </Box>

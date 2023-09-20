@@ -24,16 +24,6 @@ function Login() {
   const [erro, setErro] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (login) {
-      localStorage.setItem("user", JSON.stringify({ email: email }));
-      setEmail("");
-      setSenha("");
-      navigate("/"); //mandando para raíz do app
-    } else {
-    }
-  }, [login]);
-
   function Autenticar(evento) {
     // o evento pode ser abreviado para e
     evento.preventDefault();
@@ -57,16 +47,37 @@ function Login() {
         resposta.json()
       ) /*then - então se foi feito tudo certo pega a respotas e transforma em JSON*/
       .then((json) => {
-        console.log(json);
+        setLogin(true);
+        if (json.user) {
+          localStorage.setItem("usuario", JSON.stringify(json.user._id));
+          setLogin(true);
+        } else {
+          localStorage.removeItem("usuario");
+          setErro(true);
+        }
       }) /* então pega a respota e faz as verificações, devolvendo um token de autorização que fica salvo no local storage*/
       .catch((erro) => {
         setErro(true);
       }); /* catch - erro*/
   }
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  useEffect(() => {
+    async function espera() {
+      await delay(1000);
+      if (login) {
+        localStorage.setItem("user", JSON.stringify({ email: email }));
+        setEmail("");
+        setSenha("");
+        navigate("/"); //mandando para raíz do app
+      } else {
+      }
+    }
+    espera();
+  }, [login]);
 
   return (
     <>
-    <Header/>
+      <Header />
       <Container
         sx={{
           width: "100%",
@@ -104,6 +115,11 @@ function Login() {
               <Typography component="h1" variant="h4">
                 Entrar
               </Typography>
+              {login && (
+              <Alert severity="success" sx={{ mb: 2, mt: 2 }}>
+                Login realizado com sucesso
+              </Alert>
+              )}
               {erro && (
                 <Alert severity="error">
                   Revise seus dados e tente novamente

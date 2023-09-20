@@ -12,12 +12,13 @@ import { Navigate } from "react-router-dom";
 
 function App(props) {
   const navigate = useNavigate();
-  const [filmes, setFilmes] = useState();
+  const [produto, setProduto] = useState();
   const [erro, setErro] = useState(false);
+  const user = localStorage.getItem("usuario");
 
   //listagem de filmes
   useEffect(() => {
-    fetch(process.env.REACT_APP_BACKEND + "filmes", {
+    fetch(process.env.REACT_APP_BACKEND + "produtos/" + user, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -25,74 +26,81 @@ function App(props) {
     })
       .then((resposta) => resposta.json()) //se a resposta vier certa, transformo para json
       .then((json) => {
-        setFilmes(json);
-      }) // se json estiver certo coloco ele dentro da variavel filems
+        setProduto(json);
+        const novalista = produto.filter((produtos) => produtos.categoria === 'Esportivo');
+        setProduto(novalista);
+      })// se json estiver certo coloco ele dentro da variavel filems
       .catch((erro) => {
         setErro(true);
       });
   }, []); // [] significa que no monento da montagem da tela essa função será executada
 
+
   function Excluir(e, id) {
     e.preventDefault();
 
-    fetch(process.env.REACT_APP_BACKEND + "filmes", {
+    fetch(process.env.REACT_APP_BACKEND + "produtos", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id: id,
+        usuario: user,
       }),
     })
       .then((resposta) => resposta.json())
       .then((json) => {
-        const novalista = filmes.filter((filme) => filme._id !== id);
-        setFilmes(novalista);
+        const novalista = produto.filter((produtos) => produtos._id !== id);
+        setProduto(novalista);
       })
       .catch((erro) => {
         setErro(true);
       });
   }
 
+
   return (
     <>
       <Header mb="2rem" />
       <Banner />
-      <Container 
+      <Container
         sx={{
           width: "100%",
           height: "100%",
         }}
         className={Style.impossivel}
       >
-        <Typography variant="h2" component="h2" sx={{ fontFamily: "Roboto", maxWidth:"6rem" }}>
-          Principais Carros
-        </Typography>
-        <Box
-          component={"div"}
-          sx={{ display: {xl: 'flex', xs:'block'}, justifyContent: "space-between" }}
+        <h2
         >
-          <Cards
-            onClickVejaMais={() => {
-              navigate("/veja-mais");
-            }}
-          />
-          <Cards
-            onClickVejaMais={() => {
-              navigate("/veja-mais");
-            }}
-          />
-          <Cards
-            onClickVejaMais={() => {
-              navigate("/veja-mais");
-            }}
-          />
-          <Cards
-            onClickVejaMais={() => {
-              navigate("/veja-mais");
-            }}
-          />
-        </Box>
+          Principais Carros
+        </h2>
+        <Container
+        sx={{
+          display: "flex",
+          flexFlow: "row",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "2rem",
+          mt: "6rem",
+        }}
+      >
+        {
+          produto &&
+            produto.map((produto, index) => (
+              <Cards
+                img={produto.imagem}
+                titulo={produto.titulo}
+                descricao={produto.descricao}
+                duracao={produto.duracao}
+                ano={produto.ano}
+                categoria={produto.categoria}
+                excluir={(e) => Excluir(e, produto._id)}
+                id={produto._id}
+              />
+            )) /**Pega todos filmes e mapeia eles e exibe um por um */
+        }
+      </Container>
         <Box
           component="div"
           sx={{
