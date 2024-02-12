@@ -29,14 +29,14 @@ function Login() {
     evento.preventDefault();
 
     //requisiçoes assincronas, o js trabalha essas requisições como promessas (pois ele libera o código enquanto as coisas estão acontecendo) - promisse ES7/ javascript
-    fetch(process.env.REACT_APP_BACKEND + "login", {
+    fetch(process.env.REACT_APP_BACKEND + "users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
-        senha: senha,
+        password: senha,
       }),
       /* O fetch faz uma requisição para a url escrita, e fala para o servidor as informações que vão mandar. 
             Primeiro informa o metodo de envio, nesse caso é o POST (forma de envio de dados "camuflados"), 
@@ -116,9 +116,9 @@ function Login() {
                 Entrar
               </Typography>
               {login && (
-              <Alert severity="success" sx={{ mb: 2, mt: 2 }}>
-                Login realizado com sucesso
-              </Alert>
+                <Alert severity="success" sx={{ mb: 2, mt: 2 }}>
+                  Login realizado com sucesso
+                </Alert>
               )}
               {erro && (
                 <Alert severity="error">

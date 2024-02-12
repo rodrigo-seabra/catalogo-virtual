@@ -26,45 +26,39 @@ function Cadastro() {
 
   function Cadastrar(evento) {
     evento.preventDefault();
-    fetch(process.env.REACT_APP_BACKEND + "usuarios", {
+
+    fetch(process.env.REACT_APP_BACKEND + "users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        name: nome,
         email: email,
-        senha: senha,
-        nome: nome,
-        telefone: tell,
-        cpf: cpf,
+        phone: tell,
+        password: senha,
+        confirmpassword: confirmar,
+        CPF: cpf,
       }),
-
     })
-      .then((resposta) =>
-        resposta.json()
-      ) 
+      .then((resposta) => resposta.json())
       .then((json) => {
         if (json.cpf) {
           setCadastro(true);
           setErro(false);
-
         } else {
           setErro(true);
           setCadastro(false);
-
         }
       })
       .catch((erro) => {
         setErro(true);
-      }); 
+      });
   }
 
-  const delay = ms => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   useEffect(() => {
-    async function espera()
-    {
+    async function espera() {
       await delay(1000);
       if (cadastro) {
         setEmail("");
@@ -81,7 +75,7 @@ function Cadastro() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Container
         sx={{
           width: "100%",

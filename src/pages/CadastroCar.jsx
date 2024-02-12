@@ -23,14 +23,7 @@ function CadastroCar() {
   const [erro, setErro] = useState(false);
 
   /*const para receber os valores do autocomplete, input de categoria*/
-  const options = [
-    "Hatch",
-    "Sedã",
-    "SUV",
-    "Picapes",
-    "Crossover",
-    "Esportivo",
-  ];
+  const options = ["Hatch", "Sedã", "SUV", "Picapes", "Crossover", "Esportivo"];
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState("");
 
@@ -59,7 +52,7 @@ function CadastroCar() {
         ano: ano,
         duracao: duracao,
         imagem: imagem,
-        usuario: localStorage.getItem('usuario'),
+        usuario: localStorage.getItem("usuario"),
       }),
     })
       .then((resposta) => resposta.json())
@@ -79,7 +72,7 @@ function CadastroCar() {
 
   return (
     <>
-    <Header/>
+      <Header />
       <Container
         sx={{
           width: "100%",
