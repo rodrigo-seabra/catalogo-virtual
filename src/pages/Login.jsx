@@ -48,8 +48,9 @@ function Login() {
       ) /*then - então se foi feito tudo certo pega a respotas e transforma em JSON*/
       .then((json) => {
         setLogin(true);
-        if (json.user) {
-          localStorage.setItem("usuario", JSON.stringify(json.user._id));
+        if (json.token) {
+          localStorage.removeItem("token");
+          localStorage.setItem("token", json.token);
           setLogin(true);
         } else {
           localStorage.removeItem("usuario");

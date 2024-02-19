@@ -18,7 +18,7 @@ function CadastroCar() {
   const [descricao, setDescricao] = useState("");
   const [ano, setAno] = useState("");
   const [duracao, setDuracao] = useState("");
-  const [imagem, setImagem] = useState("");
+  const [imagem, setImagem] = useState(null);
   const [cadastrado, setCadastrado] = useState(false);
   const [erro, setErro] = useState(false);
 
@@ -26,8 +26,10 @@ function CadastroCar() {
   const options = ["Hatch", "Sedã", "SUV", "Picapes", "Crossover", "Esportivo"];
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
+    console.log(token);
     if (cadastrado) {
       setDescricao("");
       setAno("");
@@ -40,24 +42,24 @@ function CadastroCar() {
 
   function Cadastrar(evento) {
     evento.preventDefault();
-    fetch(process.env.REACT_APP_BACKEND + "produtos", {
+
+    const formData = new FormData();
+    formData.append("modelo", titulo);
+    formData.append("descricao", descricao);
+    formData.append("categoria", inputValue);
+    formData.append("ano", ano);
+    formData.append("marca", duracao);
+    formData.append("image", imagem);
+
+    fetch(process.env.REACT_APP_BACKEND + "product/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        titulo: titulo,
-        descricao: descricao,
-        categoria: inputValue,
-        ano: ano,
-        duracao: duracao,
-        imagem: imagem,
-        usuario: localStorage.getItem("usuario"),
-      }),
+      body: formData,
     })
-      .then((resposta) => resposta.json())
-      .then((json) => {
-        if (json._id) {
+      .then((resposta) => {
+        if (resposta.ok) {
           setCadastrado(true);
           setErro(false);
         } else {
@@ -66,6 +68,7 @@ function CadastroCar() {
         }
       })
       .catch((erro) => {
+        console.log(erro);
         setErro(true);
       });
   }
@@ -139,7 +142,7 @@ function CadastroCar() {
                 value={descricao}
               />
               <TextField
-                type="data"
+                type="text"
                 label="Ano"
                 variant="outlined"
                 margin="normal"
@@ -149,7 +152,7 @@ function CadastroCar() {
               />
 
               <TextField
-                type="number"
+                type="text"
                 label="Quilometragem"
                 variant="outlined"
                 margin="normal"
@@ -159,13 +162,13 @@ function CadastroCar() {
               />
 
               <TextField
-                type="text"
+                type="file"
                 label="Imagem"
                 variant="outlined"
                 margin="normal"
+                id="imageInput"
                 fullWidth
-                onChange={(e) => setImagem(e.target.value)}
-                value={imagem}
+                onChange={(e) => setImagem(e.target.files[0])}
               />
 
               <Autocomplete

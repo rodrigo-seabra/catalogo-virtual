@@ -20,6 +20,7 @@ function Cadastro() {
   const [nome, setNome] = useState("");
   const [tell, setTell] = useState("");
   const [cpf, setCpf] = useState("");
+  const [imagem, setImagem] = useState(null);
   const [cadastro, setCadastro] = useState(false);
   const [erro, setErro] = useState(false);
   const navigate = useNavigate();
@@ -39,11 +40,12 @@ function Cadastro() {
         password: senha,
         confirmpassword: confirmar,
         CPF: cpf,
+        image: imagem,
       }),
     })
       .then((resposta) => resposta.json())
       .then((json) => {
-        if (json.cpf) {
+        if (json.token) {
           setCadastro(true);
           setErro(false);
         } else {
