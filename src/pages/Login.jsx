@@ -49,11 +49,10 @@ function Login() {
       .then((json) => {
         setLogin(true);
         if (json.token) {
-          localStorage.removeItem("token");
           localStorage.setItem("token", json.token);
           setLogin(true);
         } else {
-          localStorage.removeItem("usuario");
+          localStorage.removeItem("token");
           setErro(true);
         }
       }) /* então pega a respota e faz as verificações, devolvendo um token de autorização que fica salvo no local storage*/

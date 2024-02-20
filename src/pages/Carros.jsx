@@ -13,7 +13,7 @@ function Carros() {
   const user = localStorage.getItem("usuario");
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_BACKEND + "produtos/" + user, {
+    fetch(process.env.REACT_APP_BACKEND + "product/getall", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
